@@ -4,21 +4,21 @@ import { z } from "zod";
 const handler = createMcpHandler(
   async (server) => {
     server.tool(
-      "echo",
-      "description",
+      "greet",
+      "Greet a person by name",
       {
-        message: z.string(),
+        name: z.string().describe("The name of the person to greet"),
       },
-      async ({ message }) => ({
-        content: [{ type: "text", text: `Tool echo: ${message}` }],
+      async ({ name }) => ({
+        content: [{ type: "text", text: `Hello, ${name}! 👋 Welcome to the minimal MCP demo.` }],
       })
     );
   },
   {
     capabilities: {
       tools: {
-        echo: {
-          description: "Echo a message",
+        greet: {
+          description: "Greet a person by name",
         },
       },
     },
